@@ -4,12 +4,14 @@
   "description": "advent of code 2021",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only src/01.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node-dev --respawn --transpile-only src/$DAY/$DAY.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "type:check": "tsc -p tsconfig.json --noEmit"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^16.11.11",
     "prettier": "2.5.0",
     "ts-node-dev": "^1.1.8"
   }
