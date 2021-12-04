@@ -37,22 +37,14 @@ async function main() {
 }
 
 function part1(numbers: number[], boards: Board[]) {
-  let winningBoard: Board;
-  let drawnNumbers: number[];
   for (let i = 0; i < numbers.length; i++) {
-    drawnNumbers = numbers.slice(0, i);
+    const drawnNumbers = numbers.slice(0, i);
     for (const board of boards) {
       if (checkWin(board, drawnNumbers)) {
-        winningBoard = board;
-        break;
+        return calculateScore(board, drawnNumbers);
       }
     }
-    if (winningBoard) {
-      break;
-    }
   }
-
-  return calculateScore(winningBoard, drawnNumbers);
 }
 
 function part2(numbers: number[], boards: Board[]) {
