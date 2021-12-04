@@ -58,9 +58,9 @@ function part1(numbers: number[], boards: Board[]) {
 }
 
 function part2(numbers: number[], boards: Board[]) {
-  let lastToWin = {
+  const lastToWin = {
     board: boards[0],
-    drawnNumbers: [],
+    drawnNumbers: [] as number[],
   };
 
   for (const board of boards) {
@@ -68,10 +68,8 @@ function part2(numbers: number[], boards: Board[]) {
       const drawnNumbers = numbers.slice(0, i);
       if (checkWin(board, drawnNumbers)) {
         if (drawnNumbers.length > lastToWin.drawnNumbers.length) {
-          lastToWin = {
-            board,
-            drawnNumbers: drawnNumbers,
-          };
+          lastToWin.board = board;
+          lastToWin.drawnNumbers = drawnNumbers;
         }
         break;
       }
