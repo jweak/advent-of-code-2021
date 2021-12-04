@@ -1,6 +1,6 @@
 import { readLines } from "../lib/file";
 import { sum } from "../lib/number";
-import { intersection, difference, last } from "../lib/array";
+import { intersection, difference, last, times } from "../lib/array";
 
 type Board = {
   rows: number[][];
@@ -13,10 +13,8 @@ async function main() {
   const numbersToDraw = lines[0].split(",").map((n) => parseInt(n, 10));
 
   const nonEmptyLines = lines.slice(1).filter((line) => line !== "");
-  const boards: Board[] = [];
-
   const boardCount = nonEmptyLines.length / 5;
-  for (let index = 0; index < boardCount; index++) {
+  const boards: Board[] = times(boardCount).map((index) => {
     const boardLines = nonEmptyLines.slice(index * 5, index * 5 + 5);
     const rows = boardLines.map((line) =>
       line
@@ -24,12 +22,12 @@ async function main() {
         .filter((s) => s !== "")
         .map((n) => parseInt(n, 10))
     );
-    const columns = [0, 1, 2, 3, 4].map((i) => rows.map((row) => row[i]));
-    boards.push({
+    const columns = times(5).map((i) => rows.map((row) => row[i]));
+    return {
       rows,
       columns,
-    });
-  }
+    };
+  });
 
   const p1result = part1(numbersToDraw, boards);
   console.log(`part1: ${p1result}`);
